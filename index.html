@@ -3,18 +3,47 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Última Jugada</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Schibsted+Grotesk:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<title>Alertas deportivas gratis | Última Jugada</title>
+<meta name="description" content="Recibe en tu correo los anuncios de tus deportes favoritos. Gratis y sin spam.">
+<link rel="canonical" href="https://TU-DOMINIO.com/suscripcion/">
+<meta property="og:type" content="website"><meta property="og:title" content="Alertas deportivas gratis | Última Jugada"><meta property="og:description" content="Recibe en tu correo los anuncios de tus deportes favoritos. Gratis y sin spam."><meta property="og:url" content="https://TU-DOMINIO.com/suscripcion/"><meta property="og:image" content="https://TU-DOMINIO.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏁%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<header><div class="bar">
-<a class="logo" href="#/">Última <b>Jugada</b></a>
-<nav id="nav"></nav>
-<select id="lang" aria-label="Idioma"><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option></select>
-</div></header>
-<main id="app"></main>
-<footer id="foot"></footer>
-<script src="js/app.js"></script>
+<header>
+ <div class="wrap nav">
+  <a class="logo" href="/"><span class="dot" aria-hidden="true"></span>Última Jugada</a>
+  <nav aria-label="Principal"><ul><li><a href="/anuncios/">Anuncios</a></li><li><a href="/deportes/">Deportes</a></li><li><a href="/calendario/">Calendario</a></li><li><a href="/sobre-nosotros/">Sobre nosotros</a></li><li><a href="/contacto/">Contacto</a></li></ul></nav>
+  <a class="btn primary" href="/suscripcion/" aria-current="page">Activar alertas</a>
+ </div>
+</header>
+<main id="top"><div class="wrap">
+ <div class="ph"><h1>Que la próxima gran noticia te encuentre a ti</h1><p class="sub">Elige tus deportes y recibe solo lo que te importa. Gratis, y te das de baja cuando quieras.</p></div>
+ <form class="pf" id="f3" novalidate>
+  <label for="e3">Tu correo</label><input id="e3" type="email" placeholder="nombre@correo.com" autocomplete="email">
+  <fieldset><legend>Tus deportes</legend>
+   <label><input type="checkbox" name="s3" checked>Fútbol</label><label><input type="checkbox" name="s3">Baloncesto</label><label><input type="checkbox" name="s3">Tenis</label><label><input type="checkbox" name="s3">Motor</label><label><input type="checkbox" name="s3">Ciclismo</label>
+  </fieldset>
+  <label for="fr">Frecuencia</label><select id="fr"><option>Al momento</option><option>Resumen diario</option><option>Resumen semanal</option></select>
+  <label style="font-weight:500"><input type="checkbox" id="c3" style="width:auto;min-height:0"> Acepto recibir correos y la política de privacidad.</label>
+  <button class="btn" type="submit">Quiero mis alertas</button><p class="msg" id="m3" role="status"></p>
+ </form>
+ <div class="ben" style="margin-top:32px"><div><h3>Antes que nadie</h3><p>Los anuncios llegan en cuanto se publican.</p></div><div><h3>Solo tus deportes</h3><p>Nada de ruido que no te interese.</p></div><div><h3>Sin spam</h3><p>Te das de baja en un clic.</p></div></div>
+</div></main>
+<footer><div class="wrap">
+ <div class="cols">
+  <div><b style="font:800 26px var(--display);color:var(--ink)">Última Jugada</b><br>Lo último, siempre.</div>
+  <div><a href="/anuncios/">Anuncios</a><a href="/deportes/">Deportes</a><a href="/calendario/">Calendario</a></div>
+  <div><a href="/sobre-nosotros/">Sobre nosotros</a><a href="/contacto/">Contacto</a><a href="/suscripcion/">Suscripción</a></div>
+  <div><a href="#">Aviso legal</a><a href="#">Privacidad</a><a href="/cookies/">Cookies</a></div>
+ </div>
+ <p>© 2026 Última Jugada</p>
+</div></footer>
+<script src="/app.js" defer></script>
+<script src="/i18n.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Última Jugada</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Schibsted+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1620;--bg2:#112636;--fg:#f1ece0;--mut:#9aa9b4;--line:#223a4c;--acc:#d4a950;--on:#0a1620;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3f5f7;--bg2:#fff;--fg:#0a1620;--mut:#52616d;--line:#d3dce3;--acc:#8c6a14;--on:#fff;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f3f5f7;--bg2:#fff;--fg:#0a1620;--mut:#52616d;--line:#d3dce3;--acc:#8c6a14;--on:#fff;color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 "Schibsted Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+header{position:sticky;top:calc(env(safe-area-inset-top,0px) + 10px);z-index:5;padding:0 12px}
+.bar{max-width:1000px;margin:10px auto 0;padding:7px 8px 7px 20px;display:flex;align-items:center;gap:16px;background:var(--bg2);border:1px solid var(--line);border-radius:99px}
+.logo{font:700 1.15rem Fraunces,Georgia,serif;text-decoration:none;color:var(--fg);white-space:nowrap}.logo b{font-weight:inherit}
+.logo::after{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acc);margin-left:6px}
+nav{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+nav a{color:var(--mut);text-decoration:none;font-size:.92rem;padding:7px 13px;border-radius:99px;transition:color .15s}
+nav a:hover{color:var(--fg)}nav a.on{background:var(--acc);color:var(--on);font-weight:600}
+select{background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:99px;padding:6px 10px;font:inherit;font-size:.85rem}
+main{max-width:1000px;margin:auto;padding:36px 20px 80px}
+h1{font:600 clamp(2rem,5vw,3.2rem)/1.08 Fraunces,Georgia,serif;letter-spacing:-.015em;margin:0 0 10px}
+.sub{color:var(--mut);margin:0 0 28px;max-width:46ch;font-size:1.05rem}
+.hero{position:relative;padding:48px 0 24px}
+.hero h1{font-size:clamp(2.6rem,8vw,5.2rem);line-height:1.02;max-width:12ch;margin-bottom:20px}.hero .sub{margin:0}
+.arc{position:absolute;right:0;top:20px;width:min(640px,100%);height:auto;fill:none;stroke:var(--acc);stroke-width:1.5;opacity:.6;pointer-events:none}
+.arc path{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.2s .2s ease-out forwards}
+.arc circle{fill:var(--acc);stroke:none;opacity:0;animation:pop .3s 2.3s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}@keyframes pop{to{opacity:1}}
+.lead{position:relative;display:grid;gap:6px;margin-top:36px;padding:20px 22px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;text-decoration:none;color:inherit;box-shadow:0 22px 50px rgba(0,0,0,.35)}
+.lead b{font:600 1.35rem/1.25 Fraunces,Georgia,serif}
+@media (min-width:800px){.lead{position:absolute;right:0;bottom:-40px;width:340px;margin:0}.hero{padding-bottom:60px}}
+.grid{display:grid;border-top:1px solid var(--line);margin-top:24px}
+.card{display:grid;grid-template-columns:120px 1fr;gap:4px 28px;padding:24px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;transition:padding-left .2s}
+.card:hover{padding-left:10px}
+.meta{display:flex;flex-direction:column;gap:2px}
+.card h3{margin:0 0 6px;font:600 1.35rem/1.25 Fraunces,Georgia,serif}.card p{margin:0;color:var(--mut);max-width:62ch}
+@media (max-width:640px){.card{grid-template-columns:1fr}.meta{flex-direction:row;gap:12px}}
+.tag{display:inline-block;color:var(--acc);font-weight:600;font-size:.88rem}
+.date{color:var(--mut);font-size:.85rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.chips button{border:1px solid var(--line);background:transparent;color:var(--mut);border-radius:99px;padding:6px 16px;cursor:pointer;font:inherit}
+.chips button.on{background:var(--acc);border-color:var(--acc);color:var(--on);font-weight:600}
+.btn{border:0;background:var(--acc);color:var(--on);border-radius:99px;padding:11px 24px;cursor:pointer;font:inherit;font-weight:600}
+article{max-width:660px}article h1{font-size:clamp(2rem,5vw,3rem)}article .date{display:block;margin:6px 0 24px}
+article p{font:400 1.12rem/1.75 Fraunces,Georgia,serif}
+a.back{color:var(--acc);text-decoration:none;display:inline-block;margin-bottom:20px}
+form{display:grid;gap:12px;max-width:440px}
+input,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--fg);font:inherit}
+.ok{color:var(--acc);font-weight:600}
+.day{margin:28px 0 0}.day h3{margin:0;font:600 1.1rem Fraunces,Georgia,serif;color:var(--acc)}.day .grid{margin-top:10px}
+footer{border-top:1px solid var(--line);color:var(--mut);text-align:center;padding:24px 16px;font-size:.85rem}
+.fade{animation:f .3s ease}@keyframes f{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.arc path{stroke-dashoffset:0!important}.arc circle{opacity:1!important}}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7610484398175149"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+<header><div class="bar">
+<a class="logo" href="#/">Última <b>Jugada</b></a>
+<nav id="nav"></nav>
+<select id="lang" aria-label="Idioma"><option value="es">ES</option><option value="en">EN</option><option value="fr">FR</option></select>
+</div></header>
+<main id="app"></main>
+<footer id="foot"></footer>
+<script>
+var T={
+es:{n:["Anuncios","Deportes","Calendario","Suscripción","Sobre nosotros","Contacto"],t:"Todo el deporte, en una sola jugada",s:"Anuncios y novedades de distintos deportes, redactados aquí para que no tengas que salir de la web.",all:"Todos",back:"← Volver",dep:"Elige un deporte",cal:"Publicaciones por fecha",sub:"Recibe lo último en tu correo",em:"Tu correo",go:"Suscribirme",thx:"¡Gracias! Te hemos apuntado.",abt:"Última Jugada reúne los anuncios y novedades más recientes de distintos deportes. Cada noticia se redacta y se lee directamente aquí.",nm:"Tu nombre",msg:"Tu mensaje",send:"Enviar",sent:"Mensaje enviado. ¡Gracias!",ft:"© 2026 Última Jugada"},
+en:{n:["Announcements","Sports","Calendar","Subscribe","About us","Contact"],t:"All sports, in one play",s:"Announcements and updates from different sports, written right here so you never have to leave the site.",all:"All",back:"← Back",dep:"Pick a sport",cal:"Posts by date",sub:"Get the latest by email",em:"Your email",go:"Subscribe",thx:"Thanks! You're on the list.",abt:"Última Jugada gathers the latest announcements and news from different sports. Every story is written and read right here.",nm:"Your name",msg:"Your message",send:"Send",sent:"Message sent. Thank you!",ft:"© 2026 Última Jugada"},
+fr:{n:["Annonces","Sports","Calendrier","Abonnement","À propos","Contact"],t:"Tout le sport, en un seul coup",s:"Annonces et actualités de différents sports, rédigées ici pour ne jamais quitter le site.",all:"Tous",back:"← Retour",dep:"Choisissez un sport",cal:"Publications par date",sub:"Recevez les dernières infos par e-mail",em:"Votre e-mail",go:"S'abonner",thx:"Merci ! Vous êtes inscrit.",abt:"Última Jugada rassemble les dernières annonces et actualités de différents sports. Chaque article est rédigé et lu directement ici.",nm:"Votre nom",msg:"Votre message",send:"Envoyer",sent:"Message envoyé. Merci !",ft:"© 2026 Última Jugada"}
+};
+var A=[],ok=false;
+var M={es:"Aún no hay anuncios. Vuelve en unos minutos.",en:"No announcements yet. Check back soon.",fr:"Pas encore d'annonces. Revenez bientôt."};
+function E(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function list(a){return a.length?a.map(card).join(""):'<p class="sub">'+(ok?M[L]:"…")+'</p>'}
+function load(){return fetch("data/anuncios.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){A=(j.items||[]).map(function(i){return{sp:i.sport||"Otros",d:String(i.date||"").slice(0,10),t:i.title,u:i.url,src:i.source||""}}).filter(function(a){return a.t&&/^https:\/\//.test(a.u)})}).catch(function(){A=[]})}
+var L="es";try{L=localStorage.getItem("uj-l")||"es"}catch(e){}
+var app=document.getElementById("app"),nav=document.getElementById("nav"),sel=document.getElementById("lang");
+var R=["","deportes","calendario","suscripcion","nosotros","contacto"];
+function card(a){return '<a class="card" href="'+E(a.u)+'" target="_blank" rel="noopener noreferrer"><span class="meta"><span class="date">'+E(a.d)+'</span><span class="tag">'+E(a.sp)+'</span></span><div><h3>'+E(a.t)+'</h3><p>'+E(a.src)+' ↗</p></div></a>'}
+function chips(cur){var s=["__all"].concat([...new Set(A.map(a=>a.sp))]);return '<div class="chips">'+s.map(k=>'<button data-s="'+E(k)+'" class="'+(k===cur?"on":"")+'">'+(k==="__all"?T[L].all:E(k))+'</button>').join("")+'</div>'}
+function head(t,s){return '<h1>'+t+'</h1>'+(s?'<p class="sub">'+s+'</p>':"")}
+function render(){
+var h=location.hash.replace("#/",""),t=T[L],o="";
+document.documentElement.lang=L;sel.value=L;
+nav.innerHTML=t.n.map((n,i)=>'<a href="#/'+R[i]+'" class="'+(h===R[i]||(i===0&&h.startsWith("anuncio"))?"on":"")+'">'+n+'</a>').join("");
+document.getElementById("foot").textContent=t.ft;
+if(h===""){var z=A[0],lead=z?'<a class="lead" href="'+E(z.u)+'" target="_blank" rel="noopener noreferrer"><span class="tag">'+E(z.sp)+'</span><b>'+E(z.t)+'</b><span class="date">'+E(z.src)+' · '+E(z.d)+'</span></a>':"";o='<section class="hero"><svg class="arc" viewBox="0 0 600 300" aria-hidden="true"><path pathLength="1" d="M10 285C150 10 420 0 590 250"/><circle cx="590" cy="250" r="7"/></svg><h1>'+t.t+'</h1><p class="sub">'+t.s+'</p>'+lead+'</section><div class="grid">'+list(A)+'</div>'}
+else if(h==="deportes"){o=head(t.n[1],t.dep)+chips("__all")+'<div class="grid" id="g">'+list(A)+'</div>'}
+else if(h==="calendario"){var ds=[...new Set(A.map(a=>a.d))].sort().reverse();o=head(t.n[2],t.cal)+ds.map(d=>'<div class="day"><h3>'+d+'</h3><div class="grid">'+list(A.filter(a=>a.d===d))+'</div></div>').join("")}
+else if(h==="suscripcion"){o=head(t.n[3],t.sub)+'<form id="f1"><input type="email" required placeholder="'+t.em+'"><button class="btn">'+t.go+'</button><span class="ok" id="m"></span></form>'}
+else if(h==="nosotros"){o=head(t.n[4])+'<p style="max-width:640px">'+t.abt+'</p>'}
+else if(h==="contacto"){o=head(t.n[5])+'<form id="f2"><input required placeholder="'+t.nm+'"><input type="email" required placeholder="'+t.em+'"><textarea rows="4" required placeholder="'+t.msg+'"></textarea><button class="btn">'+t.send+'</button><span class="ok" id="m"></span></form>'}
+app.innerHTML='<div class="fade">'+o+'</div>';window.scrollTo(0,0);
+var g=document.getElementById("g");
+app.querySelectorAll(".chips button").forEach(b=>b.onclick=function(){var s=b.dataset.s;app.querySelectorAll(".chips button").forEach(x=>x.classList.toggle("on",x===b));g.innerHTML=list(A.filter(a=>s==="__all"||a.sp===s))});
+["f1","f2"].forEach(i=>{var f=document.getElementById(i);if(f)f.onsubmit=function(e){e.preventDefault();document.getElementById("m").textContent=i==="f1"?t.thx:t.sent;f.reset()}});
+}
+sel.onchange=function(){L=sel.value;try{localStorage.setItem("uj-l",L)}catch(e){}render()};
+window.onhashchange=render;render();load().then(function(){ok=true;render()});
+</script>
+</body>
+</html>
